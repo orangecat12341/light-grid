@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light Grid</title>
+    <script src="/socketio.js"></script>
+    <style>
+        .centeredGrid {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .line {
+            display: flex;
+            flex-direction: row;
+        }
+        .pixel {
+            width: 40px;
+            height: 40px;
+            border: 1px solid black;
+            background-color:black;
+            border-radius: 5px;
+            margin: 0.5px;
+        }
+        .setGridColor {
+            border-style: none;
+            height: 32px;
+            background-color:white;
+        }
+        .gridSet {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .generalPixelBtns {
+            margin-top: 5px;
+        }
+        .colorPallet {
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="centeredGrid">
+        <div class="line1 line">
+            <input type="color" id="pixel1" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel2" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel3" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel4" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel5" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel6" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel7" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel8" class="pixel" value="#000000"></input>
+        </div>
+        <div class="line2 line">
+            <input type="color" id="pixel9" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel10" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel11" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel12" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel13" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel14" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel15" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel16" class="pixel" value="#000000"></input>
+        </div>
+        <div class="line3 line">
+            <input type="color" id="pixel17" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel18" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel19" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel20" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel21" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel22" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel23" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel24" class="pixel" value="#000000"></input>
+        </div>
+        <div class="line4 line">
+            <input type="color" id="pixel25" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel26" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel27" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel28" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel29" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel30" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel31" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel32" class="pixel" value="#000000"></input>
+        </div>
+        <div class="line5 line">
+            <input type="color" id="pixel33" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel34" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel35" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel36" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel37" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel38" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel39" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel40" class="pixel" value="#000000"></input>
+        </div>
+        <div class="line6 line">
+            <input type="color" id="pixel41" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel42" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel43" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel44" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel45" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel46" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel47" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel48" class="pixel" value="#000000"></input>
+        </div>
+        <div class="line7 line">
+            <input type="color" id="pixel49" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel50" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel51" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel52" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel53" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel54" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel55" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel56" class="pixel" value="#000000"></input>
+        </div>
+        <div class="line8 line">
+            <input type="color" id="pixel57" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel58" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel59" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel60" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel61" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel62" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel63" class="pixel" value="#000000"></input>
+            <input type="color" id="pixel64" class="pixel" value="#000000"></input>
+        </div>
+        <div>
+            <div class="generalPixelBtns">
+                <button onclick="send_updated_pixels()">update</button>
+                <button onclick="socket.emit('get_color_grid')">refresh</button>
+                <button onclick="resetColorGrid('#000000')">reset</button>
+            </div>
+            <div class="gridSet">
+                <button onclick="setColorGridTo()">set grid to: </button>
+                <input type="color" id="fullGridSet" value="#000000" class="setGridColor">
+            </div>
+        </div>
+    </div>
+    <script src="/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light Grid V7</title>
+    <script src="/socketio.js"></script>
+    <style>
+        body {
+            background-color: #0d1321;
+        }
+        .centeredGrid {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .line {
+            display: flex;
+            flex-direction: row;
+        }
+        .pixel {
+            width: 30px;
+            height: 30px;
+            border: 0.5px solid #748cab;
+            background-color:black;
+            border-radius: 5px;
+            margin: 0px;
+        }
+        .colorInput {
+            border-style: none;
+            height: 32px;
+            background-color: #0d1321;
+        }
+        .gridSet {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 5px;
+        }
+        .pallet {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        .colorPick {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .generalPixelBtns {
+            margin-top: 8px;
+        }
+        #colorDropper {
+            margin-left: 4px;
+            background-color: blue;
+            border: 2px solid #f0ebd8;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #colorDropper img {
+            height: 15px;
+            width: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="centeredGrid">
+            <div class="line1 line">
+                <button id='pixel1' class='pixel' onclick='setPixel("pixel1")' value='#000000'></button> 
+                <button id='pixel2' class='pixel' onclick='setPixel("pixel2")' value='#000000'></button> 
+                <button id='pixel3' class='pixel' onclick='setPixel("pixel3")' value='#000000'></button> 
+                <button id='pixel4' class='pixel' onclick='setPixel("pixel4")' value='#000000'></button> 
+                <button id='pixel5' class='pixel' onclick='setPixel("pixel5")' value='#000000'></button> 
+                <button id='pixel6' class='pixel' onclick='setPixel("pixel6")' value='#000000'></button> 
+                <button id='pixel7' class='pixel' onclick='setPixel("pixel7")' value='#000000'></button> 
+                <button id='pixel8' class='pixel' onclick='setPixel("pixel8")' value='#000000'></button> 
+                <button id='pixel9' class='pixel' onclick='setPixel("pixel9")' value='#000000'></button> 
+                <button id='pixel10' class='pixel' onclick='setPixel("pixel10")' value='#000000'></button> 
+                <button id='pixel11' class='pixel' onclick='setPixel("pixel11")' value='#000000'></button> 
+                <button id='pixel12' class='pixel' onclick='setPixel("pixel12")' value='#000000'></button> 
+            </div>
+            <div class="line2 line">
+                <button id='pixel13' class='pixel' onclick='setPixel("pixel13")' value='#000000'></button> 
+                <button id='pixel14' class='pixel' onclick='setPixel("pixel14")' value='#000000'></button> 
+                <button id='pixel15' class='pixel' onclick='setPixel("pixel15")' value='#000000'></button> 
+                <button id='pixel16' class='pixel' onclick='setPixel("pixel16")' value='#000000'></button> 
+                <button id='pixel17' class='pixel' onclick='setPixel("pixel17")' value='#000000'></button> 
+                <button id='pixel18' class='pixel' onclick='setPixel("pixel18")' value='#000000'></button> 
+                <button id='pixel19' class='pixel' onclick='setPixel("pixel19")' value='#000000'></button> 
+                <button id='pixel20' class='pixel' onclick='setPixel("pixel20")' value='#000000'></button> 
+                <button id='pixel21' class='pixel' onclick='setPixel("pixel21")' value='#000000'></button> 
+                <button id='pixel22' class='pixel' onclick='setPixel("pixel22")' value='#000000'></button> 
+                <button id='pixel23' class='pixel' onclick='setPixel("pixel23")' value='#000000'></button> 
+                <button id='pixel24' class='pixel' onclick='setPixel("pixel24")' value='#000000'></button> 
+            </div>
+            <div class="line3 line">
+                <button id='pixel25' class='pixel' onclick='setPixel("pixel25")' value='#000000'></button> 
+                <button id='pixel26' class='pixel' onclick='setPixel("pixel26")' value='#000000'></button> 
+                <button id='pixel27' class='pixel' onclick='setPixel("pixel27")' value='#000000'></button> 
+                <button id='pixel28' class='pixel' onclick='setPixel("pixel28")' value='#000000'></button> 
+                <button id='pixel29' class='pixel' onclick='setPixel("pixel29")' value='#000000'></button> 
+                <button id='pixel30' class='pixel' onclick='setPixel("pixel30")' value='#000000'></button> 
+                <button id='pixel31' class='pixel' onclick='setPixel("pixel31")' value='#000000'></button> 
+                <button id='pixel32' class='pixel' onclick='setPixel("pixel32")' value='#000000'></button> 
+                <button id='pixel33' class='pixel' onclick='setPixel("pixel33")' value='#000000'></button> 
+                <button id='pixel34' class='pixel' onclick='setPixel("pixel34")' value='#000000'></button> 
+                <button id='pixel35' class='pixel' onclick='setPixel("pixel35")' value='#000000'></button> 
+                <button id='pixel36' class='pixel' onclick='setPixel("pixel36")' value='#000000'></button> 
+            </div>
+            <div class="line4 line">
+                <button id='pixel37' class='pixel' onclick='setPixel("pixel37")' value='#000000'></button> 
+                <button id='pixel38' class='pixel' onclick='setPixel("pixel38")' value='#000000'></button> 
+                <button id='pixel39' class='pixel' onclick='setPixel("pixel39")' value='#000000'></button> 
+                <button id='pixel40' class='pixel' onclick='setPixel("pixel40")' value='#000000'></button> 
+                <button id='pixel41' class='pixel' onclick='setPixel("pixel41")' value='#000000'></button> 
+                <button id='pixel42' class='pixel' onclick='setPixel("pixel42")' value='#000000'></button> 
+                <button id='pixel43' class='pixel' onclick='setPixel("pixel43")' value='#000000'></button> 
+                <button id='pixel44' class='pixel' onclick='setPixel("pixel44")' value='#000000'></button> 
+                <button id='pixel45' class='pixel' onclick='setPixel("pixel45")' value='#000000'></button> 
+                <button id='pixel46' class='pixel' onclick='setPixel("pixel46")' value='#000000'></button> 
+                <button id='pixel47' class='pixel' onclick='setPixel("pixel47")' value='#000000'></button> 
+                <button id='pixel48' class='pixel' onclick='setPixel("pixel48")' value='#000000'></button> 
+            </div>
+            <div class="line5 line">
+                <button id='pixel49' class='pixel' onclick='setPixel("pixel49")' value='#000000'></button> 
+                <button id='pixel50' class='pixel' onclick='setPixel("pixel50")' value='#000000'></button> 
+                <button id='pixel51' class='pixel' onclick='setPixel("pixel51")' value='#000000'></button> 
+                <button id='pixel52' class='pixel' onclick='setPixel("pixel52")' value='#000000'></button> 
+                <button id='pixel53' class='pixel' onclick='setPixel("pixel53")' value='#000000'></button> 
+                <button id='pixel54' class='pixel' onclick='setPixel("pixel54")' value='#000000'></button> 
+                <button id='pixel55' class='pixel' onclick='setPixel("pixel55")' value='#000000'></button> 
+                <button id='pixel56' class='pixel' onclick='setPixel("pixel56")' value='#000000'></button> 
+                <button id='pixel57' class='pixel' onclick='setPixel("pixel57")' value='#000000'></button> 
+                <button id='pixel58' class='pixel' onclick='setPixel("pixel58")' value='#000000'></button> 
+                <button id='pixel59' class='pixel' onclick='setPixel("pixel59")' value='#000000'></button> 
+                <button id='pixel60' class='pixel' onclick='setPixel("pixel60")' value='#000000'></button> 
+            </div>
+            <div class="line6 line">
+                <button id='pixel61' class='pixel' onclick='setPixel("pixel61")' value='#000000'></button> 
+                <button id='pixel62' class='pixel' onclick='setPixel("pixel62")' value='#000000'></button> 
+                <button id='pixel63' class='pixel' onclick='setPixel("pixel63")' value='#000000'></button> 
+                <button id='pixel64' class='pixel' onclick='setPixel("pixel64")' value='#000000'></button> 
+                <button id='pixel65' class='pixel' onclick='setPixel("pixel65")' value='#000000'></button> 
+                <button id='pixel66' class='pixel' onclick='setPixel("pixel66")' value='#000000'></button> 
+                <button id='pixel67' class='pixel' onclick='setPixel("pixel67")' value='#000000'></button> 
+                <button id='pixel68' class='pixel' onclick='setPixel("pixel68")' value='#000000'></button> 
+                <button id='pixel69' class='pixel' onclick='setPixel("pixel69")' value='#000000'></button> 
+                <button id='pixel70' class='pixel' onclick='setPixel("pixel70")' value='#000000'></button> 
+                <button id='pixel71' class='pixel' onclick='setPixel("pixel71")' value='#000000'></button> 
+                <button id='pixel72' class='pixel' onclick='setPixel("pixel72")' value='#000000'></button>  
+            </div>
+            <div class="line7 line">
+                <button id='pixel73' class='pixel' onclick='setPixel("pixel73")' value='#000000'></button> 
+                <button id='pixel74' class='pixel' onclick='setPixel("pixel74")' value='#000000'></button> 
+                <button id='pixel75' class='pixel' onclick='setPixel("pixel75")' value='#000000'></button> 
+                <button id='pixel76' class='pixel' onclick='setPixel("pixel76")' value='#000000'></button> 
+                <button id='pixel77' class='pixel' onclick='setPixel("pixel77")' value='#000000'></button> 
+                <button id='pixel78' class='pixel' onclick='setPixel("pixel78")' value='#000000'></button> 
+                <button id='pixel79' class='pixel' onclick='setPixel("pixel79")' value='#000000'></button> 
+                <button id='pixel80' class='pixel' onclick='setPixel("pixel80")' value='#000000'></button> 
+                <button id='pixel81' class='pixel' onclick='setPixel("pixel81")' value='#000000'></button> 
+                <button id='pixel82' class='pixel' onclick='setPixel("pixel82")' value='#000000'></button> 
+                <button id='pixel83' class='pixel' onclick='setPixel("pixel83")' value='#000000'></button> 
+                <button id='pixel84' class='pixel' onclick='setPixel("pixel84")' value='#000000'></button> 
+            </div>
+            <div class="line8 line">
+                <button id='pixel85' class='pixel' onclick='setPixel("pixel85")' value='#000000'></button> 
+                <button id='pixel86' class='pixel' onclick='setPixel("pixel86")' value='#000000'></button> 
+                <button id='pixel87' class='pixel' onclick='setPixel("pixel87")' value='#000000'></button> 
+                <button id='pixel88' class='pixel' onclick='setPixel("pixel88")' value='#000000'></button> 
+                <button id='pixel89' class='pixel' onclick='setPixel("pixel89")' value='#000000'></button> 
+                <button id='pixel90' class='pixel' onclick='setPixel("pixel90")' value='#000000'></button> 
+                <button id='pixel91' class='pixel' onclick='setPixel("pixel91")' value='#000000'></button> 
+                <button id='pixel92' class='pixel' onclick='setPixel("pixel92")' value='#000000'></button> 
+                <button id='pixel93' class='pixel' onclick='setPixel("pixel93")' value='#000000'></button> 
+                <button id='pixel94' class='pixel' onclick='setPixel("pixel94")' value='#000000'></button> 
+                <button id='pixel95' class='pixel' onclick='setPixel("pixel95")' value='#000000'></button> 
+                <button id='pixel96' class='pixel' onclick='setPixel("pixel96")' value='#000000'></button> 
+            </div>
+            <div class="line9 line">
+                <button id='pixel97' class='pixel' onclick='setPixel("pixel97")' value='#000000'></button> 
+                <button id='pixel98' class='pixel' onclick='setPixel("pixel98")' value='#000000'></button> 
+                <button id='pixel99' class='pixel' onclick='setPixel("pixel99")' value='#000000'></button> 
+                <button id='pixel100' class='pixel' onclick='setPixel("pixel100")' value='#000000'></button> 
+                <button id='pixel101' class='pixel' onclick='setPixel("pixel101")' value='#000000'></button> 
+                <button id='pixel102' class='pixel' onclick='setPixel("pixel102")' value='#000000'></button> 
+                <button id='pixel103' class='pixel' onclick='setPixel("pixel103")' value='#000000'></button> 
+                <button id='pixel104' class='pixel' onclick='setPixel("pixel104")' value='#000000'></button> 
+                <button id='pixel105' class='pixel' onclick='setPixel("pixel105")' value='#000000'></button> 
+                <button id='pixel106' class='pixel' onclick='setPixel("pixel106")' value='#000000'></button> 
+                <button id='pixel107' class='pixel' onclick='setPixel("pixel107")' value='#000000'></button> 
+                <button id='pixel108' class='pixel' onclick='setPixel("pixel108")' value='#000000'></button> 
+            </div>
+            <div class="line10 line">
+                <button id='pixel109' class='pixel' onclick='setPixel("pixel109")' value='#000000'></button> 
+                <button id='pixel110' class='pixel' onclick='setPixel("pixel110")' value='#000000'></button> 
+                <button id='pixel111' class='pixel' onclick='setPixel("pixel111")' value='#000000'></button> 
+                <button id='pixel112' class='pixel' onclick='setPixel("pixel112")' value='#000000'></button> 
+                <button id='pixel113' class='pixel' onclick='setPixel("pixel113")' value='#000000'></button> 
+                <button id='pixel114' class='pixel' onclick='setPixel("pixel114")' value='#000000'></button> 
+                <button id='pixel115' class='pixel' onclick='setPixel("pixel115")' value='#000000'></button> 
+                <button id='pixel116' class='pixel' onclick='setPixel("pixel116")' value='#000000'></button> 
+                <button id='pixel117' class='pixel' onclick='setPixel("pixel117")' value='#000000'></button> 
+                <button id='pixel118' class='pixel' onclick='setPixel("pixel118")' value='#000000'></button> 
+                <button id='pixel119' class='pixel' onclick='setPixel("pixel119")' value='#000000'></button> 
+                <button id='pixel120' class='pixel' onclick='setPixel("pixel120")' value='#000000'></button> 
+            </div>
+            <div class="line11 line">
+                <button id='pixel121' class='pixel' onclick='setPixel("pixel121")' value='#000000'></button> 
+                <button id='pixel122' class='pixel' onclick='setPixel("pixel122")' value='#000000'></button> 
+                <button id='pixel123' class='pixel' onclick='setPixel("pixel123")' value='#000000'></button> 
+                <button id='pixel124' class='pixel' onclick='setPixel("pixel124")' value='#000000'></button> 
+                <button id='pixel125' class='pixel' onclick='setPixel("pixel125")' value='#000000'></button> 
+                <button id='pixel126' class='pixel' onclick='setPixel("pixel126")' value='#000000'></button> 
+                <button id='pixel127' class='pixel' onclick='setPixel("pixel127")' value='#000000'></button> 
+                <button id='pixel128' class='pixel' onclick='setPixel("pixel128")' value='#000000'></button> 
+                <button id='pixel129' class='pixel' onclick='setPixel("pixel129")' value='#000000'></button> 
+                <button id='pixel130' class='pixel' onclick='setPixel("pixel130")' value='#000000'></button> 
+                <button id='pixel131' class='pixel' onclick='setPixel("pixel131")' value='#000000'></button> 
+                <button id='pixel132' class='pixel' onclick='setPixel("pixel132")' value='#000000'></button> 
+            </div>
+            <div class="line12 line">
+                <button id='pixel133' class='pixel' onclick='setPixel("pixel133")' value='#000000'></button> 
+                <button id='pixel134' class='pixel' onclick='setPixel("pixel134")' value='#000000'></button> 
+                <button id='pixel135' class='pixel' onclick='setPixel("pixel135")' value='#000000'></button> 
+                <button id='pixel136' class='pixel' onclick='setPixel("pixel136")' value='#000000'></button> 
+                <button id='pixel137' class='pixel' onclick='setPixel("pixel137")' value='#000000'></button> 
+                <button id='pixel138' class='pixel' onclick='setPixel("pixel138")' value='#000000'></button> 
+                <button id='pixel139' class='pixel' onclick='setPixel("pixel139")' value='#000000'></button> 
+                <button id='pixel140' class='pixel' onclick='setPixel("pixel140")' value='#000000'></button> 
+                <button id='pixel141' class='pixel' onclick='setPixel("pixel141")' value='#000000'></button> 
+                <button id='pixel142' class='pixel' onclick='setPixel("pixel142")' value='#000000'></button> 
+                <button id='pixel143' class='pixel' onclick='setPixel("pixel143")' value='#000000'></button> 
+                <button id='pixel144' class='pixel' onclick='setPixel("pixel144")' value='#000000'></button> 
+            </div>
+        <div class="generalPixelBtns">
+            <button onclick="send_updated_pixels()">update</button>
+            <button onclick="socket.emit('get_color_grid')">refresh</button>
+            <button onclick="resetColorGrid('#000000')">reset</button>
+        </div>
+        <div class="gridSet">
+            <input type="color" id="paintbrush" class="colorInput" value="#000000">
+            <button onclick="setColorGridTo()">set grid to paintbrush</button>
+            <button id="colorDropper" onclick="dropper()"><img src="/images/dropper.png"></button>
+        </div>
+        <div class="pallet">
+            <div class="colorPick">
+                <button onclick="setPaintbrush(pick1)">Set: </button>
+                <input type="color" id="pick1" class="colorInput" value="#ff0000">
+            </div>
+            <div class="colorPick">
+                <button onclick="setPaintbrush(pick2)">Set: </button>
+                <input type="color" id="pick2" class="colorInput" value="#00ff00">
+            </div>
+            <div class="colorPick">
+                <button onclick="setPaintbrush(pick3)">Set: </button>
+                <input type="color" id="pick3" class="colorInput" value="#0000ff">
+            </div>
+            <div class="colorPick">
+                <button onclick="setPaintbrush(pick4)">Set: </button>
+                <input type="color" id="pick4" class="colorInput" value="#ffffff">
+            </div>
+        </div>
+    </div>
+    <script src="/v6.js"></script>
+</body>
+</html>

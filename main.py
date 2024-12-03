@@ -40,7 +40,7 @@ socketio = SocketIO(app)
 
 @app.route('/')
 def index():
-    return render_template("v6.html")
+    return render_template("v7.html")
 
 @app.route('/v1/')
 def v1():
@@ -65,6 +65,10 @@ def v5():
 @app.route('/v6/')
 def v6():
     return render_template("v6.html")
+
+@app.route('/v7/')
+def v7():
+    return render_template("v7.html")
 
 @app.route('/animator/')
 def animator():

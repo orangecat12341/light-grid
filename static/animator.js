@@ -132,8 +132,8 @@ function fillButtonGrid(grid) {
     });
 };
 socket.on('load_animation', (data) => {
-    drawGrid(data);
-    console.log(data[0])
+	document.getElementById('speedInput').value = data[0];
+	drawGrid(data);
     if (hasFrameBeenSelected == false) {
         selectFrame('frame1');
         hasFrameBeenSelected = true
@@ -233,5 +233,5 @@ function deleteFrame(frameId) {
     sendAllFrames();
 }
 document.getElementById('speedInput').addEventListener('input', (event) => {
-    sendAllFrames();
+    sendUpdate();
 });

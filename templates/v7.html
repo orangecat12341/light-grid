@@ -243,6 +243,8 @@
             <button onclick="send_updated_pixels()">update</button>
             <button onclick="socket.emit('get_color_grid')">refresh</button>
             <button onclick="resetColorGrid('#000000')">reset</button>
+            <button onclick="socket.emit('setAnim')">start animation</button>
+            <button onclick="socket.emit('stopAnim')">stop</button>
         </div>
         <div class="gridSet">
             <input type="color" id="paintbrush" class="colorInput" value="#000000">
@@ -267,6 +269,10 @@
                 <input type="color" id="pick4" class="colorInput" value="#ffffff">
             </div>
         </div>
+	<form method="POST" enctype="multipart/form-data" action="/upload">
+	  <input type="file" name="file">
+	  <input type="submit" value="Upload">
+	</form>
     </div>
     <script src="/v7.js"></script>
 </body>

@@ -2,11 +2,12 @@ from flask import Flask, request, jsonify, render_template, url_for, redirect, s
 from flask_socketio import SocketIO, emit, join_room, leave_room
 import pickle, os, string, random, neopixel, board, time, threading
 from rpi_ws281x import *
+import giftoanim
 
 running = [True]
 threads = []
 
-pixels = neopixel.NeoPixel(board.D18, 256)
+pixels = neopixel.NeoPixel(board.D12, 144) #pin 32 on Rpi zero 2w
 
 def grid(grid):
     pixel = []
@@ -27,6 +28,21 @@ def setAnim():
                 grid(file[i+1])
                 time.sleep(float(file[0]))
 
+def startup_anim():
+    file = pickle.load(open("startup_animation.txt", "rb"))
+    for i in range(len(file) - 1):
+        if running[0]:
+            grid(file[i+1])
+            time.sleep(float(file[0]))
+    clearGrid()
+
+def startup():
+    stopAnim()
+    running[0] = True
+    t = threading.Thread(target=startup_anim)
+    threads.append(t)
+    t.start()
+
 def stopAnim():
     running[0] = False
     for t in threads:
@@ -35,9 +51,36 @@ def stopAnim():
 def clearGrid():
     pixels.fill((00, 00, 00))
 
+startup()
+    
 app = Flask(__name__, static_url_path="")
 socketio = SocketIO(app)
 
+@app.route('/upload', methods=['POST'])
+def upload_gif():
+    if request.method == "POST":
+        if 'file' not in request.files:
+            return redirect('/animator/')
+        file = request.files['file']
+        if file:
+            if file.content_type == 'image/gif':
+                file.save('input.gif')
+                print(request.files)
+                giftoanim.convertGifToAnim('input.gif')
+                return redirect('/animator/')
+            if file.content_type == 'image/png':
+                file.save('input.png')
+                giftoanim.downscale_image('input.png', 12, 12, 'downscale_input.png')
+                giftoanim.get_frames_from_img('downscale_input.png')
+                os.remove('downscale_input.png')
+            if file.content_type == 'image/jpg' or file.content_type == 'image/jpeg':
+                file.save('input.jpg')
+                giftoanim.downscale_image('input.jpg', 12, 12, 'downscale_input.jpg')
+                giftoanim.get_frames_from_img('downscale_input.jpg')
+                os.remove('downscale_input.jpg')
+            data = pickle.load(open('color.txt', 'rb'))
+            grid(data)
+            return redirect('/')
 @app.route('/')
 def index():
     return render_template("v7.html")
@@ -81,6 +124,7 @@ def send_color_grid():
 
 @socketio.on('update_color_grid')
 def update_color_grid(data):
+    stopAnim()
     pickle.dump(data, open("color.txt", "wb"))
     socketio.emit('color_grid', data)
     grid(data)
@@ -92,7 +136,6 @@ def animation():
     t = threading.Thread(target=setAnim)
     threads.append(t)
     t.start()
-    
     
 @socketio.on('stopAnim')
 def stop():
@@ -106,10 +149,9 @@ def get_animation():
 
 @socketio.on('add_animation')
 def add_animation(animationData):
-    print(animationData)
+    #print(animationData)
     pickle.dump(animationData, open("animation.txt", "wb"))
-    socketio.emit('load_animation', animationData)
-
+    socketio.emit('load_animation', animationData)    
 
 if __name__ == '__main__':
     socketio.run(app, host="0.0.0.0", port=570)

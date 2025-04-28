@@ -232,6 +232,16 @@ function deleteFrame(frameId) {
     }
     sendAllFrames();
 }
+
+function showFrames() {
+    if (document.getElementById('frameToggle').innerHTML == 'Hide') {
+	document.getElementById('animationsBar').style.visibility = 'hidden'
+	document.getElementById('frameToggle').innerHTML = 'Show'
+    } else {
+	document.getElementById('animationsBar').style.visibility = 'visible'
+	document.getElementById('frameToggle').innerHTML = 'Hide'
+    }
+}
 document.getElementById('speedInput').addEventListener('input', (event) => {
     sendUpdate();
 });

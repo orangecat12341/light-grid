@@ -129,6 +129,7 @@
     </style>
 </head>
 <body>
+  <button onclick="showFrames()" id="frameToggle">Hide</button>
     <div class="centeredGrid">
             <div class="line1 line">
                 <button id='pixel1' class='pixel' onclick='setPixel("pixel1")' value='#000000'></button>
@@ -328,14 +329,18 @@
                 <input type="color" id="pick4" class="colorInput" value="#ffffff">
             </div>
         </div>
+	<form method="POST" enctype="multipart/form-data" action="/upload">
+	  <input type="file" name="file">
+	  <input type="submit" value="Upload">
+	</form>
     </div>
     <div id="animationsBar">
-        <div id="manage">
-            <button onclick="deleteAll()">Delete All</button>
-            <button onclick="addNewFrame(false)">Add Frame</button>
-        </div>
-        <input id="speedInput" type="number" placeholder="speed in sec" value="1">
-        <div class="frameBox" id="frameBox"></div>
+      <div id="manage">
+	<button onclick="deleteAll()">Delete All</button>
+	<button onclick="addNewFrame(false)">Add Frame</button>
+      </div>
+      <input id="speedInput" type="number" placeholder="speed in sec" value="1">
+      <div class="frameBox" id="frameBox"></div>
     </div>
     <script src="/animator.js"></script>
 </body>
